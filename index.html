@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JULDRA UNIFORMES - Catálogo Digital</title>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Configuración de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#1a3a63',
+                        rojo: '#e74c3c',
+                        naranja: '#f39c12',
+                        azul: '#2c5aa0',
+                        gris: '#f8fafc'
+                    },
+                    fontFamily: {
+                        fraunces: ['Fraunces', 'serif'],
+                        poppins: ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Estilos personalizados -->
+    <style>
+        /* Fuentes */
+        .font-fraunces { font-family: 'Fraunces', serif; }
+        .font-poppins { font-family: 'Poppins', sans-serif; }
+        
+        /* Logo */
+        .logo-main {
+            font-family: 'Fraunces', serif;
+            font-weight: 700;
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+        .logo-sub {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+        }
+        
+        /* Animaciones */
+        .fade-in { animation: fadeIn 0.6s ease-in; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Scroll suave */
+        html { scroll-behavior: smooth; }
+        
+        /* Producto hover */
+        .producto-card {
+            transition: all 0.3s ease;
+        }
+        .producto-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(26, 58, 99, 0.15);
+        }
+        
+        /* Carrito */
+        .carrito-item {
+            transition: all 0.3s ease;
+        }
+        .carrito-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Botón WhatsApp flotante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Responsividad mejorada */
+        @media (max-width: 640px) {
+            .logo-main {
+                font-size: 2.5rem;
+            }
+            .logo-sub {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Mejoras para dispositivos móviles */
+        @media (max-width: 768px) {
+            .producto-card {
+                margin-bottom: 1rem;
+            }
+            
+            .carrito-item {
+                padding: 0.75rem;
+            }
+        }
+        
+        /* Optimizaciones para pantallas pequeñas */
+        @media (max-width: 480px) {
+            .whatsapp-float {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .whatsapp-float a {
+                width: 50px;
+                height: 50px;
+            }
+        }
+        
+        /* Animaciones personalizadas para el fondo */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        @keyframes drift {
+            0%, 100% { transform: translateX(0px) translateY(0px); }
+            25% { transform: translateX(10px) translateY(-10px); }
+            50% { transform: translateX(-5px) translateY(5px); }
+            75% { transform: translateX(-10px) translateY(-5px); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .drift-animation {
+            animation: drift 8s ease-in-out infinite;
+        }
+
+    /* Gradiente animado tipo blob/spotlight */
+    .blob-gradient {
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle at 50% 50%, #3b82f6 0%, #1e40af 60%, transparent 100%);
+        opacity: 0.35;
+        filter: blur(80px);
+        animation: moveBlob 12s ease-in-out infinite alternate;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        pointer-events: none;
+    }
+    @keyframes moveBlob {
+        0% {
+            transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        }
+        40% {
+            transform: translate(-48%, -52%) scale(1.08) rotate(8deg);
+        }
+        60% {
+            transform: translate(-52%, -48%) scale(0.95) rotate(-6deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(1.05) rotate(0deg);
+        }
+    }
+    @media (max-width: 700px) {
+        .blob-gradient {
+            width: 350px;
+            height: 350px;
+            filter: blur(40px);
+        }
+    }
+    </style>
+</head>
+<body class="font-poppins bg-white">
+    <!-- Navegación -->
+    <nav class="bg-navy text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="text-center">
+                        <div class="logo-main text-white text-lg sm:text-xl md:text-2xl">JULDRA</div>
+                        <div class="logo-sub text-gray-300 text-xs sm:text-sm">UNIFORMES</div>
+                    </div>
+                </div>
+                
+                <!-- Navegación Desktop -->
+                <div class="hidden lg:flex items-center space-x-6 xl:space-x-8">
+                    <a href="#inicio" class="flex items-center space-x-1 hover:text-gray-300 transition-colors text-sm xl:text-base">
+                        <i data-lucide="home" class="w-4 h-4"></i>
+                        <span>Inicio</span>
+                    </a>
+                    <a href="#productos" class="flex items-center space-x-1 hover:text-gray-300 transition-colors text-sm xl:text-base">
+                        <i data-lucide="shirt" class="w-4 h-4"></i>
+                        <span>Productos</span>
+                    </a>
+                    <a href="#tallas" class="flex items-center space-x-1 hover:text-gray-300 transition-colors text-sm xl:text-base">
+                        <i data-lucide="ruler" class="w-4 h-4"></i>
+                        <span>Guía de Tallas</span>
+                    </a>
+                    <a href="#personalizacion" class="flex items-center space-x-1 hover:text-gray-300 transition-colors text-sm xl:text-base">
+                        <i data-lucide="palette" class="w-4 h-4"></i>
+                        <span>Personalización</span>
+                    </a>
+                    <a href="#contacto" class="flex items-center space-x-1 hover:text-gray-300 transition-colors text-sm xl:text-base">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                        <span>Contacto</span>
+                    </a>
+                </div>
+                
+                <!-- Navegación Mobile -->
+                <div class="lg:hidden flex items-center space-x-2">
+                    <a href="#productos" class="p-2 hover:bg-navy/20 rounded-full transition-colors">
+                        <i data-lucide="shirt" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#tallas" class="p-2 hover:bg-navy/20 rounded-full transition-colors">
+                        <i data-lucide="ruler" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#contacto" class="p-2 hover:bg-navy/20 rounded-full transition-colors">
+                        <i data-lucide="phone" class="w-5 h-5"></i>
+                    </a>
+                </div>
+                
+                <!-- Carrito -->
+                <div class="flex items-center">
+                    <button id="btnCarrito" class="relative p-2 hover:bg-navy/20 rounded-full transition-colors">
+                        <i data-lucide="shopping-cart" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                        <span id="carritoContador" class="absolute -top-1 -right-1 bg-rojo text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hidden">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sección Inicio -->
+    <section id="inicio" class="relative min-h-screen w-full bg-gradient-to-br from-slate-900 via-navy to-slate-800 text-white flex items-center justify-center overflow-hidden">
+        <!-- Fondo base limpio -->
+        <div class="absolute inset-0 w-full h-full bg-gradient-to-br from-slate-900 via-navy to-slate-800"></div>
+        
+        <!-- Gradiente animado central tipo blob/spotlight -->
+        <div class="absolute inset-0 w-full h-full flex items-center justify-center pointer-events-none">
+            <div class="blob-gradient"></div>
+        </div>
+
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4">
+            <div class="fade-in">
+                <!-- Logo principal -->
+                <div class="mb-8">
+                    <div class="logo-main text-white mb-2 text-3xl sm:text-4xl md:text-5xl">JULDRA</div>
+                    <div class="logo-sub text-gray-300 mb-6 text-sm sm:text-base">UNIFORMES</div>
+                </div>
+                
+                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-fraunces font-bold mb-6">
+                    Catálogo Digital
+                </h1>
+                
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto px-4">
+                    Descubre nuestra colección de uniformes profesionales con la mejor calidad y diseño
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center px-4">
+                    <a href="#productos" class="bg-white text-navy px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm sm:text-base">
+                        Ver Productos
+                    </a>
+                    <a href="#tallas" class="border-2 border-white text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-navy transition-colors text-sm sm:text-base">
+                        Guía de Tallas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Productos -->
+    <section id="productos" class="py-16 relative bg-gradient-to-b from-[#eaf1fa] via-[#f3f7fb] to-[#eaf1fa]">
+        <div class="absolute inset-0 pointer-events-none z-0" style="background: radial-gradient(circle at 60% 20%, rgba(59,130,246,0.08) 0%, transparent 70%);"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Título -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-fraunces font-bold text-navy mb-4">Nuestros Productos</h2>
+                <p class="text-gray-600 text-lg">Encuentra el uniforme perfecto para tu empresa</p>
+            </div>
+            
+            <!-- Filtros -->
+            <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6 sm:mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Categoría</label>
+                        <select id="filtroCategoria" class="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent text-sm">
+                            <option value="">Todas las categorías</option>
+                            <option value="camisas">Camisas</option>
+                            <option value="pantalones">Pantalones</option>
+                            <option value="chalecos">Chalecos</option>
+                            <option value="uniformes">Uniformes Completos</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                        <select id="filtroColor" class="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent text-sm">
+                            <option value="">Todos los colores</option>
+                            <option value="azul">Azul</option>
+                            <option value="blanco">Blanco</option>
+                            <option value="negro">Negro</option>
+                            <option value="gris">Gris</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sm:col-span-2 lg:col-span-1">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Precio</label>
+                        <select id="filtroPrecio" class="w-full p-2 sm:p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-navy focus:border-transparent text-sm">
+                            <option value="">Todos los precios</option>
+                            <option value="0-50">Hasta $50</option>
+                            <option value="50-100">$50 - $100</option>
+                            <option value="100-150">$100 - $150</option>
+                            <option value="150+">Más de $150</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Grid de productos -->
+            <div id="productosGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Los productos se cargarán dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Guía de Tallas -->
+    <section id="tallas" class="py-16 relative bg-gradient-to-b from-[#eaf1fa] via-[#f3f7fb] to-[#eaf1fa]">
+        <div class="absolute inset-0 pointer-events-none z-0" style="background: radial-gradient(circle at 40% 80%, rgba(59,130,246,0.08) 0%, transparent 70%);"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="w-12 h-12 bg-navy rounded-full flex items-center justify-center mr-3">
+                        <i data-lucide="ruler" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h2 class="text-4xl font-fraunces font-bold text-navy">Guía de Tallas</h2>
+                </div>
+                <p class="text-gray-600 text-lg">Encuentra tu talla perfecta con nuestras medidas estándar</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                <!-- Tabla de tallas -->
+                <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 sm:p-8 shadow-lg border border-gray-100 h-full flex flex-col">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-navy rounded-lg flex items-center justify-center mr-3">
+                            <i data-lucide="list" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-fraunces font-bold text-navy">Tallas Estándar</h3>
+                    </div>
+                    
+                    <div class="overflow-x-auto flex-1">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b-2 border-navy/20">
+                                    <th class="text-left py-4 px-3 font-semibold text-navy">Talla</th>
+                                    <th class="text-left py-4 px-3 font-semibold text-navy">Pecho (cm)</th>
+                                    <th class="text-left py-4 px-3 font-semibold text-navy">Cintura (cm)</th>
+                                    <th class="text-left py-4 px-3 font-semibold text-navy">Altura (cm)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                                    <td class="py-6 px-3 font-bold">
+                                        <span class="bg-navy text-white px-4 py-2 rounded-full text-sm font-semibold">S</span>
+                                    </td>
+                                    <td class="py-6 px-3">90-95</td>
+                                    <td class="py-6 px-3">75-80</td>
+                                    <td class="py-6 px-3">165-170</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                                    <td class="py-6 px-3 font-bold">
+                                        <span class="bg-navy text-white px-4 py-2 rounded-full text-sm font-semibold">M</span>
+                                    </td>
+                                    <td class="py-6 px-3">95-100</td>
+                                    <td class="py-6 px-3">80-85</td>
+                                    <td class="py-6 px-3">170-175</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                                    <td class="py-6 px-3 font-bold">
+                                        <span class="bg-navy text-white px-4 py-2 rounded-full text-sm font-semibold">L</span>
+                                    </td>
+                                    <td class="py-6 px-3">100-105</td>
+                                    <td class="py-6 px-3">85-90</td>
+                                    <td class="py-6 px-3">175-180</td>
+                                </tr>
+                                <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors">
+                                    <td class="py-6 px-3 font-bold">
+                                        <span class="bg-navy text-white px-4 py-2 rounded-full text-sm font-semibold">XL</span>
+                                    </td>
+                                    <td class="py-6 px-3">105-110</td>
+                                    <td class="py-6 px-3">90-95</td>
+                                    <td class="py-6 px-3">180-185</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition-colors">
+                                    <td class="py-6 px-3 font-bold">
+                                        <span class="bg-navy text-white px-4 py-2 rounded-full text-sm font-semibold">XXL</span>
+                                    </td>
+                                    <td class="py-6 px-3">110-115</td>
+                                    <td class="py-6 px-3">95-100</td>
+                                    <td class="py-6 px-3">185-190</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Instrucciones de medida -->
+                <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 sm:p-8 shadow-lg border border-gray-100 h-full flex flex-col">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-navy rounded-lg flex items-center justify-center mr-3">
+                            <i data-lucide="help-circle" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-fraunces font-bold text-navy">Cómo Medir</h3>
+                    </div>
+                    
+                    <div class="space-y-6 flex-1">
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-navy to-azul text-white rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+                                <i data-lucide="user" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy text-lg mb-1">Pecho</h4>
+                                <p class="text-gray-600">Mide alrededor del punto más ancho del pecho, manteniendo la cinta métrica horizontal</p>
+                                <div class="mt-2">
+                                    <span class="bg-blue-100 text-navy px-2 py-1 rounded text-xs font-medium">Medida horizontal</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-navy to-azul text-white rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+                                <i data-lucide="circle" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy text-lg mb-1">Cintura</h4>
+                                <p class="text-gray-600">Mide alrededor de la cintura natural, donde normalmente se ajusta el cinturón</p>
+                                <div class="mt-2">
+                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">Cintura natural</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-navy to-azul text-white rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+                                <i data-lucide="arrow-up-down" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy text-lg mb-1">Altura</h4>
+                                <p class="text-gray-600">Mide desde la parte superior de la cabeza hasta los pies, sin zapatos</p>
+                                <div class="mt-2">
+                                    <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-medium">Sin calzado</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Personalización -->
+    <section id="personalizacion" class="py-16 relative bg-gradient-to-b from-[#eaf1fa] via-[#f3f7fb] to-[#eaf1fa]">
+        <div class="absolute inset-0 pointer-events-none z-0" style="background: radial-gradient(circle at 80% 30%, rgba(59,130,246,0.08) 0%, transparent 70%);"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <div class="flex items-center justify-center mb-4">
+                    <div class="w-12 h-12 bg-navy rounded-full flex items-center justify-center mr-3">
+                        <i data-lucide="palette" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h2 class="text-4xl font-fraunces font-bold text-navy">Personalización</h2>
+                </div>
+                <p class="text-gray-600 text-lg">Personaliza tus uniformes con el logo de tu empresa</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                <!-- Servicios de Personalización -->
+                <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 sm:p-8 shadow-lg border border-gray-100 h-full flex flex-col">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-navy rounded-lg flex items-center justify-center mr-3">
+                            <i data-lucide="settings" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-fraunces font-bold text-navy">Servicios de Personalización</h3>
+                    </div>
+                    
+                    <div class="space-y-6 flex-1">
+                        <div class="flex items-center p-6 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-5">
+                                <i data-lucide="scissors" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-navy text-lg mb-1">Bordado de Logos</h4>
+                                <p class="text-gray-600">Bordado profesional de alta calidad</p>
+                            </div>
+                            <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-medium">Premium</span>
+                        </div>
+                        
+                        <div class="flex items-center p-6 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mr-5">
+                                <i data-lucide="printer" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-navy text-lg mb-1">Serigrafía Personalizada</h4>
+                                <p class="text-gray-600">Impresión duradera y resistente</p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">Duradera</span>
+                        </div>
+                        
+                        <div class="flex items-center p-6 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mr-5">
+                                <i data-lucide="tag" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-navy text-lg mb-1">Parches Bordados</h4>
+                                <p class="text-gray-600">Parches removibles y reutilizables</p>
+                            </div>
+                            <span class="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium">Removible</span>
+                        </div>
+                        
+                        <div class="flex items-center p-6 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mr-5">
+                                <i data-lucide="user-check" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-navy text-lg mb-1">Nombres y Cargos</h4>
+                                <p class="text-gray-600">Identificación personalizada</p>
+                            </div>
+                            <span class="bg-orange-100 text-orange-700 px-4 py-2 rounded-full text-sm font-medium">Personal</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Proceso de Personalización -->
+                <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl p-6 sm:p-8 shadow-lg border border-gray-100 h-full flex flex-col">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-navy rounded-lg flex items-center justify-center mr-3">
+                            <i data-lucide="workflow" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-fraunces font-bold text-navy">Proceso de Personalización</h3>
+                    </div>
+                    
+                    <div class="space-y-6 flex-1">
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-navy to-azul text-white rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+                                <i data-lucide="upload" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy text-lg mb-1">1. Envía tu Logo</h4>
+                                <p class="text-gray-600">Envía tu logo en formato vectorial (AI, EPS, SVG) para mejor calidad</p>
+                                <div class="mt-2">
+                                    <span class="bg-blue-100 text-navy px-2 py-1 rounded text-xs font-medium">Formatos: AI, EPS, SVG</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-navy to-azul text-white rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy text-lg mb-1">2. Selecciona Ubicación</h4>
+                                <p class="text-gray-600">Elige la ubicación exacta donde quieres el bordado o impresión</p>
+                                <div class="mt-2">
+                                    <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-medium">Pecho, manga, espalda</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-navy to-azul text-white rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+                                <i data-lucide="eye" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy text-lg mb-1">3. Muestra de Prueba</h4>
+                                <p class="text-gray-600">Recibe una muestra para aprobar el diseño antes de la producción</p>
+                                <div class="mt-2">
+                                    <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-medium">Aprobación previa</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 p-4 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 bg-gradient-to-br from-navy to-azul text-white rounded-full flex items-center justify-center text-lg font-bold flex-shrink-0">
+                                <i data-lucide="truck" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-navy text-lg mb-1">4. Producción y Entrega</h4>
+                                <p class="text-gray-600">Fabricamos tu pedido personalizado y lo entregamos en tiempo récord</p>
+                                <div class="mt-2">
+                                    <span class="bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-medium">Entrega rápida</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer/Contacto -->
+    <section id="contacto" class="py-16 bg-navy text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <!-- Logo y descripción -->
+                <div>
+                    <div class="mb-4">
+                        <div class="logo-main text-white">JULDRA</div>
+                        <div class="logo-sub text-gray-300">UNIFORMES</div>
+                    </div>
+                    <p class="text-gray-300 mb-4">
+                        Especialistas en uniformes profesionales con la mejor calidad y diseño para tu empresa.
+                    </p>
+                </div>
+                
+                <!-- Información de contacto -->
+                <div>
+                    <h3 class="text-xl font-fraunces font-bold mb-4">Contacto</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="phone" class="w-5 h-5"></i>
+                            <span>+57 300 123 4567</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                            <span>info@juldra.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                            <span>Guadalajara, Jalisco</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Redes sociales -->
+                <div>
+                    <h3 class="text-xl font-fraunces font-bold mb-4">Síguenos</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 mt-8 pt-8 text-center">
+                <p class="text-gray-300">&copy; 2024 JULDRA UNIFORMES. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal del Carrito -->
+    <div id="modalCarrito" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg shadow-xl max-w-sm sm:max-w-md w-full max-h-[80vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-fraunces font-bold text-navy">Carrito de Compras</h3>
+                        <button id="cerrarModal" class="text-gray-500 hover:text-gray-700">
+                            <i data-lucide="x" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                    
+                    <div id="carritoItems" class="space-y-4 mb-6">
+                        <!-- Items del carrito se cargarán aquí -->
+                    </div>
+                    
+                    <div class="border-t pt-4">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-semibold">Total:</span>
+                            <span id="carritoTotal" class="font-bold text-navy">$0</span>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+                            <button id="vaciarCarrito" class="flex-1 bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors text-sm">
+                                Vaciar
+                            </button>
+                            <button id="enviarWhatsApp" class="flex-1 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors text-sm">
+                                Enviar por WhatsApp
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón WhatsApp flotante -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/523312345678?text=Hola,%20me%20interesa%20conocer%20más%20sobre%20sus%20uniformes" 
+           target="_blank" 
+           class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600">
+            <i data-lucide="message-circle" class="w-7 h-7"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html> 
